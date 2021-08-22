@@ -7,11 +7,9 @@
     "target": "es5",
     "jsx": "react-jsx",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
   },
   "include": [
     "src/"
-  ],
-  "exclude": [
-    "./webpack.config.js"
   ]
 }

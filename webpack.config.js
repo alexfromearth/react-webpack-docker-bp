@@ -32,8 +32,23 @@ module.exports =  {
         },
             {
                 test: /\.s?css$/i,
-                use: [MiniExtractCssPlugin.loader, "css-loader", "postcss-loader"]
-            }]
+                use: [
+                    {
+                        loader: MiniExtractCssPlugin.loader,
+                        options: {
+                            publicPath: ''
+                        }
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true
+                        }
+                    },
+                    "postcss-loader"]
+            }
+        ]
     },
     devServer: {
         port: 9000,
@@ -44,7 +59,7 @@ module.exports =  {
         ignored: /node_modules/,
     },
     resolve: {
-        extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+        extensions: [".js", ".json", ".ts", ".tsx"],
     },
     plugins: [
         new CleanWebpackPlugin(),
