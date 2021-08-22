@@ -16,20 +16,29 @@ module.exports =  {
     entry: { index: path.resolve(__dirname, "src", "index.ts") },
     output: {
         path: path.resolve(__dirname, "dist"),
-        assetModuleFilename: "images/[hash][ext][query]"
     },
     module: {
         rules: [
+            {
+                test: /\.(png|jpe?g|gif|svg)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: () => mode === 'development'
+                        ? '[path][name].[ext]'
+                        :  '[hash].[ext]',
+                    outputPath: 'images',
+                }
+            },
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: 'ts-loader',
             },
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: "babel-loader"
-        },
+            },
             {
                 test: /\.s?css$/i,
                 use: [
