@@ -60,9 +60,13 @@ module.exports =  {
         ]
     },
     devServer: {
-        port: 9000,
-        static: 'src',
+        host: '0.0.0.0',
+        port: 3000,
         hot: true,
+        allowedHosts: 'all',
+        client: {
+            webSocketURL: 'ws://localhost:4001/ws'
+        }
     },
     watchOptions: {
         ignored: /node_modules/,
